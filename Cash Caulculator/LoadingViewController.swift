@@ -56,7 +56,6 @@ class LoadingViewController: UIViewController, firebaseLoadingFinish{
         let currency = firebaseHelper.countriesCurrency?.filter({
             $0.countryName == country
         })
-        caulculatorViewController.country = country
         caulculatorViewController.countryCurrency = currency?.first
         caulculatorViewController.countryCurrencies = firebaseHelper.countriesCurrency
         let navigationController = UINavigationController(rootViewController: caulculatorViewController)
@@ -70,6 +69,9 @@ class LoadingViewController: UIViewController, firebaseLoadingFinish{
             return country
         }else{
             userdefault.set(Constant.defaultCountry, forKey: Constant.userDefaultKey)
+            let fileHelper = FileHelper()
+            
+            fileHelper.saveJsonArray(currencyBundles: [fileHelper.defaultData])
             return Constant.defaultCountry
         }
     }

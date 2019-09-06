@@ -15,21 +15,23 @@ class CashCaulculatorCell: UITableViewCell{
     var signLabel : CashCaulculatorLabel = {
         var label = CashCaulculatorLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = NSTextAlignment.left
+        label.textAlignment = NSTextAlignment.center
         return label
     }()
     
     var sign:String?
     
+    var bundleValue : Int?
+    
     var cellValue : Double?{
         didSet{
-            changeSignLabel(sign: self.sign!, value: cellValue!)
+            changeSignLabel(value: cellValue!)
         }
     }
     
     var result : Double?{
         didSet{
-            changeResultLabel(sign: self.sign!, value: round(result!*100)/100)
+            changeResultLabel(value: round(result!*100)/100)
         }
     }
     
@@ -52,6 +54,7 @@ class CashCaulculatorCell: UITableViewCell{
     var resultLabel : CashCaulculatorLabel = {
         var label = CashCaulculatorLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = NSTextAlignment.center
         return label
     }()
     
@@ -68,7 +71,7 @@ class CashCaulculatorCell: UITableViewCell{
         self.contentView.addSubview(bundleNumberTextField)
         self.contentView.addSubview(resultLabel)
         
-        contentView.addConstraintsWithFormat(format: "H:|-8-[v0(v2)]-8-[v1(v2)]-8-[v2(v3)]-8-[v3]-8-|", views: signLabel,bundleNumberTextField,noteNumberTextField,resultLabel)
+        contentView.addConstraintsWithFormat(format: "H:|-8-[v0(v2)]-8-[v1(v2)]-16-[v2(v3)]-8-[v3]-8-|", views: signLabel,bundleNumberTextField,noteNumberTextField,resultLabel)
         contentView.addConstraintsWithFormat(format: "V:|-2-[v0]-2-|", views: signLabel)
         contentView.addConstraintsWithFormat(format: "V:|-2-[v0]-2-|", views: bundleNumberTextField)
         contentView.addConstraintsWithFormat(format: "V:|-2-[v0]-2-|", views: noteNumberTextField)
@@ -78,13 +81,16 @@ class CashCaulculatorCell: UITableViewCell{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
-    func changeSignLabel(sign:String, value:Any){
-        signLabel.text = "\(sign)\(value) "
+    func changeSignLabel(value:Any){
+        signLabel.text = "\(sign!)\(value) "
     }
     
-    func changeResultLabel(sign:String,value:Double) {
-        resultLabel.text = "= \(sign)\(value)"
+    
+    
+    func changeResultLabel(value:Double) {
+        resultLabel.text = "\(sign!)\(value)"
     }
 }
 

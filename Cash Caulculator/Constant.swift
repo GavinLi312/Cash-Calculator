@@ -36,6 +36,15 @@ class Constant{
     
     
     // MARK: - Default Bundle Number
-    static let bundleNumber = 10
+    static let defaultBundleNumber = 10
+    
+    
+    //MARK: - Menu Bar
+    static let menuArray = ["Change Currency","Set Bundle ","Exit"]
+    
+    
+    //MARK: - File name Country Currency bundle setting for note and coin
+    static let countruCurrencyBundleSettingFile = "countruCurrencyBundleSettingFile.json"
+    
 }
 
